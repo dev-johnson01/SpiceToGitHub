@@ -24,9 +24,24 @@ namespace Spice.Areas.Admin.Controllers
            return View(category);
         }
 
-        //Get
+        //Get-Create
         public IActionResult Create()
         {
+            return View();
+        }
+       
+        //Post-Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Category category)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Category.Add(category);
+                await _db.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+
             return View();
         }
     }
