@@ -12,8 +12,33 @@
         </div>
 
         <div class="col-6 text-right">
-            Create Button
+            @await Html.PartialAsync("~/Views/Shared/_CreateButtonPartial.cshtml")
         </div>
 
-    </div> 
+    </div>
+    <div>
+        @if (Model.Count() > 0)
+        {
+            <table class="table table-striped">
+                <tr class="table-secondary">
+                    <th> @Html.DisplayNameFor(u => u.Name)</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(u => item.Name)</td>
+                        <td>Edit|Details|Delete</td>
+                    </tr>
+                }
+
+            </table>
+        }
+        else
+        {
+            <p>No Category Found</p>
+        }
+    </div>
 </div>
