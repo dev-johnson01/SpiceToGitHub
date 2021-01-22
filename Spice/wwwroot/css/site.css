@@ -74,20 +74,20 @@ body {
     background:url('/images/white-background.jpg')
 }
 
-.backgorundWhite{
+.backgroundWhite{
      background-color: white;
      padding:30px;
      border-radius:10px;
      margin-bottom:30px;
 }
-.backgorundWhiteBorder {
+.backgroundWhiteBorder {
     background-color: white;
     padding: 30px;
     border-radius: 10px;
     margin-bottom: 30px;
     border: solid 1px #ddd;
 }
-.backgorundWhiteBorder10px {
+.backgroundWhiteBorder10px {
     background-color: white;
     padding: 10px;
     border-radius: 10px;
