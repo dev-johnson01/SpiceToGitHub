@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MenuItem>
+﻿@model IEnumerable<Coupon>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,7 +9,7 @@
 <div class="border backgroundWhite">
     <div class="row">
         <div class="col-6">
-            <h2 class="text-info">Category List</h2>
+            <h2 class="text-info">Coupon List</h2>
         </div>
 
         <div class="col-6 text-right">
@@ -17,40 +17,38 @@
         </div>
 
     </div>
-
     <div>
         @if (Model.Count() > 0)
         {
             <table class="table table-striped">
                 <tr class="table-secondary">
                     <th> @Html.DisplayNameFor(u => u.Name)</th>
-                    <th> @Html.DisplayNameFor(u => u.Price)</th>
-                    <th> @Html.DisplayNameFor(u => u.CategoryId)</th>
-                    <th> @Html.DisplayNameFor(u => u.SubCategoryId)</th>
-
+                    <th> @Html.DisplayNameFor(u => u.Discount)</th>
+                    <th> @Html.DisplayNameFor(u => u.MinimumAmount)</th>
+                    <th> @Html.DisplayNameFor(u => u.IsActive)</th>
                     <th></th>
                     <th></th>
                 </tr>
 
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>@Html.DisplayFor(u => item.Name)</td>
+            <tr>
+                <td>@Html.DisplayFor(u => item.Name)</td>
+                <td>@Html.DisplayFor(u => item.Discount)</td>
+                <td>@Html.DisplayFor(u => item.MinimumAmount)</td>
+                <td>@Html.DisplayFor(u => item.IsActive)</td>
 
-                        <td>@Html.DisplayFor(u => item.Price)</td>
-                        <td>@Html.DisplayFor(u => item.Category.Name)</td>
-                        <td>@Html.DisplayFor(u => item.SubCategory.Name)</td>
-
-                        <partial name="_TableButtonPartial" model="item.Id" />
-                     </tr>
+                <partial name="_TableButtonPartial" model="item.Id" />
+            </tr>
                 }
 
             </table>
         }
         else
         {
-            <p>No MenuItem Found</p>
+            <p>No Coupon Found</p>
         }
     </div>
 </div>
+
 
