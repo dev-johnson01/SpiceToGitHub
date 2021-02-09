@@ -79,13 +79,13 @@ namespace Spice.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-
+            
             return View(CouponFromDb);
         }
 
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit()
+        public async Task<IActionResult> EditPOST(int?id)
         {
             if (!ModelState.IsValid)
             {
@@ -96,17 +96,18 @@ namespace Spice.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-
             
             var files = HttpContext.Request.Form.Files;
+            var CouponFromDb = await _db.Coupon.SingleOrDefaultAsync(s => s.Id == id);
 
             if (files.Count() > 0)
             {
-                var imageFromDb = Encoding.Default.GetString(coupon.Picture);
+               
+                /*var imageFromDb = Encoding.Default.GetString(CouponFromDb.Picture);
                 if (System.IO.File.Exists(imageFromDb))
                 {
                     System.IO.File.Delete(imageFromDb);
-                }
+                }*/
 
 
                 byte[] p1 = null;
@@ -123,20 +124,24 @@ namespace Spice.Areas.Admin.Controllers
                
             }
 
-            _db.Coupon.Update(coupon);
+            CouponFromDb.Name = coupon.Name;
+            CouponFromDb.CouponType = coupon.CouponType;
+            CouponFromDb.Discount = coupon.Discount;
+            CouponFromDb.MinimumAmount = coupon.MinimumAmount;
+            CouponFromDb.IsActive = coupon.IsActive;
             await _db.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Details(int ? id)
+        public async Task <IActionResult> Details(int ? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var CouponFromDb = _db.Coupon.FindAsync(id);
+            var CouponFromDb = await _db.Coupon.SingleOrDefaultAsync(s => s.Id == id);
             if (CouponFromDb == null)
             {
                 return NotFound();

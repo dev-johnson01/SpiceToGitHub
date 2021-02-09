@@ -145,6 +145,8 @@ namespace Spice.Areas.Admin.Controllers
                 var uploads = Path.Combine(webRootPath, "images");
                 var extension_new = Path.GetExtension(files[0].FileName);
 
+                //Delete the original file
+
                 var imagePath = Path.Combine(webRootPath, MenuItemFromDb.Image.TrimStart('\\'));
 
                 if (System.IO.File.Exists(imagePath))
